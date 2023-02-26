@@ -1,4 +1,4 @@
-from abstract_plants import BasePlant
+from lab1.Plants.abstract_plants import BasePlant
 from abc import abstractmethod
 
 
@@ -18,7 +18,7 @@ class Tree(BasePlant):
     def grow(self):
         if self.age > 5:
             self.create_fruit()
-        super().__init__()
+        super().grow()
 
     @abstractmethod
     def create_fruit(self):

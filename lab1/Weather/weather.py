@@ -1,16 +1,16 @@
 import random
 
-from .abstract_weather import BaseWeather
+from lab1.Weather.abstract_weather import BaseWeather
 
 
 class Weather(BaseWeather):
     def __init__(self):
         self._is_sunny: bool = random.choice([True, False])
-        self._is_rainy: True if random.randint(1, 4) == 2 else False
+        self._is_rainy: bool = True if random.randint(1, 4) == 2 else False
 
     def next_day(self):
         self.is_sunny: bool = random.choice([True, False])
-        self.is_rainy: True if random.randint(1, 4) == 2 else False
+        self.is_rainy: bool = True if random.randint(1, 4) == 2 else False
 
     @property
     def is_sunny(self):

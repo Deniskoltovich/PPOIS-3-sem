@@ -1,8 +1,8 @@
 from abc import ABC, abstractmethod
 
 
-class BaseWeather(ABC):
-
+class BaseWeather(ABC): ...
+'''
     @abstractmethod
     def get_sunny(self):
         raise NotImplementedError
@@ -18,3 +18,4 @@ class BaseWeather(ABC):
     @abstractmethod
     def get_cloudy(self):
         raise NotImplementedError
+'''

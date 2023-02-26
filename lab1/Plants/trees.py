@@ -1,4 +1,4 @@
-from plant import Tree, Fruit
+from lab1.Plants.plant import Tree, Fruit
 
 
 class AppleTree(Tree):

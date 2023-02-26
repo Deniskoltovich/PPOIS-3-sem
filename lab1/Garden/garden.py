@@ -1,11 +1,11 @@
-from field import Field
-from ..Weather.weather import Weather
+from lab1.Garden.field import Field
+from lab1.Weather.weather import Weather
 
 
 class BaseGarden:
     WEATHER = Weather()
 
-    def __init__(self, fields: tuple[Field]):
+    def __init__(self, fields: list[Field]):
         self._fields = fields
 
     def next_day(self):

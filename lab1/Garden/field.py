@@ -1,14 +1,14 @@
 import random
 
-from ..Plants.plant import Tree, Vegetable
-from ..Plants.weed import Weed
+from lab1.Plants.plant import Tree, Vegetable
+from lab1.Plants.weed import Weed
 
 
 class Field:
-    def __init__(self, plants_collection: list[Tree | Vegetable]):
+    def __init__(self, plant: Tree | Vegetable):
         self._weed: Weed | None = Weed() if random.randint(1, 5) == 2 else None
         if not self._weed:
-            self._plant: Tree | Vegetable | Weed | None = random.choice(plants_collection)
+            self._plant: Tree | Vegetable | Weed | None = plant
         else:
             self._plant = None
 
@@ -16,7 +16,8 @@ class Field:
         if self.weed and self.plant:
             self.plant.health -= 10
             self.plant.get_dehydrated(5)
-        self.plant.grow()
+        if self.plant is not None:
+            self.plant.grow()
 
     @property
     def weed(self):
