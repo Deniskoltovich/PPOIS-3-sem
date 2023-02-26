@@ -1,9 +1,59 @@
 import random
-from abc import abstractmethod
-from ..Plants.abstract_plants import BasePlant
+
+from ..Plants.plant import Tree, Vegetable
+from ..Plants.weed import Weed
 
 
 class Field:
-    def __init__(self, plants_collection: list[BasePlant]):
-        self.plant = random.choice(plants_collection )
-        self.weed = random.choice([True, False])
+    def __init__(self, plants_collection: list[Tree | Vegetable]):
+        self._weed: Weed | None = Weed() if random.randint(1, 5) == 2 else None
+        if not self._weed:
+            self._plant: Tree | Vegetable | Weed | None = random.choice(plants_collection)
+        else:
+            self._plant = None
+
+    def grow(self):
+        if self.weed and self.plant:
+            self.plant.health -= 10
+            self.plant.get_dehydrated(5)
+        self.plant.grow()
+
+    @property
+    def weed(self):
+        return self._weed
+
+    @weed.setter
+    def weed(self, value: None | Weed):
+        self._weed = value
+
+    @property
+    def plant(self):
+        return self._plant
+
+    @plant.setter
+    def plant(self, value: None | Tree | Vegetable):
+        self._plant = value
+
+
+class FieldAction:
+    def __init__(self, field: Field):
+        self.field = field
+
+    def weeding(self):
+        if self.field.weed is not None:
+            self.field.weed.die()
+        return self.field
+
+    def desinfect_plant(self):
+        self.field.plant.pests.destruction_power = 0
+        self.field.plant.illness.destruction_power = 0
+        return self.field
+
+    def hydrate_field(self):
+        self.field.plant.get_hydrated()
+        return self.field
+
+    def fertilizing(self):
+        self.field.plant.health += 20
+        return self.field
+
