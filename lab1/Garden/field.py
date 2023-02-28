@@ -1,7 +1,7 @@
 import random
 
-from lab1.Plants.plant import Tree, Vegetable
-from lab1.Plants.weed import Weed
+from Plants.abstract_plants import Tree, Vegetable
+from Plants.weed import Weed
 
 
 class Field:
@@ -13,6 +13,7 @@ class Field:
             self._plant = None
 
     def grow(self):
+        """Imitate plant's grown and changes the state of plant"""
         if self.weed and self.plant:
             self.plant.health -= 10
             self.plant.get_dehydrated(5)
@@ -40,16 +41,26 @@ class FieldAction:
     def __init__(self, field: Field):
         self.field = field
 
-    def weeding(self):
+    def weeding(self, plant):
+        """
+        Swap weed on the field with PLANT
+        :param plant:
+        :return:
+        """
         if self.field.weed is not None:
-            self.field.weed.die()
+            self.field.weed = None
+            self.field.plant = plant()
         return self.field
 
     def desinfect_plant(self):
+        """Kills all pests and illnesses"""
         if self.field.plant:
             self.field.plant.pests.destruction_power = 0
             self.field.plant.illness.destruction_power = 0
         return self.field
+
+    def kill_plant(self):
+        self.field.plant.die()
 
     def hydrate_field(self):
         if self.field.plant:

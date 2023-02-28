@@ -1,4 +1,4 @@
-from lab1.Plants.plant import Tree, Fruit
+from Plants.abstract_plants import Tree, Fruit
 
 
 class AppleTree(Tree):
@@ -24,4 +24,17 @@ class PearTree(Tree):
 
 
 class Pear(Fruit):
+    ...
+
+
+class PeachTree(Tree):
+    def create_fruit(self):
+        if not self.fruit:
+            self.fruit = Peach()
+
+    def __str__(self):
+        return 'Pear Tree'
+
+
+class Peach(Fruit):
     ...

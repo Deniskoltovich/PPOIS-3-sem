@@ -1,5 +1,5 @@
-from lab1.Garden.field import Field
-from lab1.Weather.weather import Weather
+from Garden.field import Field
+from Weather.weather import Weather
 
 
 class BaseGarden:
@@ -9,6 +9,7 @@ class BaseGarden:
         self._fields = fields
 
     def next_day(self):
+        """Change the weather and imitate all plant's grown"""
         health_impact = self.WEATHER.is_sunny * 5
         hydro_impact = self.WEATHER.is_rainy * 10
         for field in self.fields:
@@ -16,6 +17,9 @@ class BaseGarden:
                 field.plant.get_hydrated(hydro_impact)
                 field.plant.health += health_impact
             field.grow()
+            if hasattr(field.plant, 'ready_plant'):
+                if field.plant.ready_plant:
+                    field.plant = field.plant.ready_plant
 
         self.WEATHER.next_day()
 

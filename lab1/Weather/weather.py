@@ -1,6 +1,6 @@
 import random
 
-from lab1.Weather.abstract_weather import BaseWeather
+from Weather.abstract_weather import BaseWeather
 
 
 class Weather(BaseWeather):
