@@ -1,0 +1,41 @@
+{
+    "weather": {
+        "_is_sunny": true,
+        "_is_rainy": false
+    },
+    "fields": [
+        {
+            "field_pk": 0,
+            "weed": false,
+            "tree": true,
+            "plant": "Apple Tree",
+            "health": 48,
+            "hydration_level": 70,
+            "age": 2,
+            "pests_damage": 19,
+            "illness_damage": 16
+        },
+        {
+            "field_pk": 1,
+            "weed": false,
+            "tree": true,
+            "plant": "Pear Tree",
+            "health": 64,
+            "hydration_level": 70,
+            "age": 2,
+            "pests_damage": 12,
+            "illness_damage": 15
+        },
+        {
+            "field_pk": 2,
+            "weed": false,
+            "tree": false,
+            "plant": "Vegetable",
+            "health": 50,
+            "hydration_level": 70,
+            "age": 2,
+            "pests_damage": 19,
+            "illness_damage": 15
+        }
+    ]
+}

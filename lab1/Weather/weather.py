@@ -27,3 +27,8 @@ class Weather(BaseWeather):
     @is_rainy.setter
     def is_rainy(self, value: bool):
         self._is_rainy = value
+
+    def __str__(self):
+        tmp_1 = 'Cloudy' if not self._is_sunny else 'Sunny'
+        tmp_2 = ', Rainy' if self._is_rainy else ''
+        return tmp_1 + tmp_2

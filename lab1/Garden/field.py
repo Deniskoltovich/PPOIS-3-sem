@@ -5,7 +5,7 @@ from lab1.Plants.weed import Weed
 
 
 class Field:
-    def __init__(self, plant: Tree | Vegetable):
+    def __init__(self, plant: Tree | Vegetable | None):
         self._weed: Weed | None = Weed() if random.randint(1, 5) == 2 else None
         if not self._weed:
             self._plant: Tree | Vegetable | Weed | None = plant
@@ -46,15 +46,17 @@ class FieldAction:
         return self.field
 
     def desinfect_plant(self):
-        self.field.plant.pests.destruction_power = 0
-        self.field.plant.illness.destruction_power = 0
+        if self.field.plant:
+            self.field.plant.pests.destruction_power = 0
+            self.field.plant.illness.destruction_power = 0
         return self.field
 
     def hydrate_field(self):
-        self.field.plant.get_hydrated()
+        if self.field.plant:
+            self.field.plant.get_hydrated()
         return self.field
 
     def fertilizing(self):
-        self.field.plant.health += 20
+        if self.field.plant:
+            self.field.plant.health += 20
         return self.field
-

@@ -24,7 +24,7 @@ class AbstractPlant(ABC):
 
 class Illness:
     def __init__(self):
-        self._destruction_power = random.randint(1, 40)
+        self._destruction_power = random.randint(10, 20)
 
     @property
     def destruction_power(self):
@@ -37,7 +37,7 @@ class Illness:
 
 class Pests:
     def __init__(self):
-        self._destruction_power = random.randint(1, 20)
+        self._destruction_power = random.randint(10, 20)
 
     @property
     def destruction_power(self):
@@ -49,29 +49,38 @@ class Pests:
 
 
 class BasePlant(AbstractPlant):
-    def __init__(self):
+    def __init__(self, health: int = 100,
+                 hydration_level: int = 100, age: int = 0):
         self.illness = Illness()
-        self._age = 0
-        self._health = 100
-        self._hydration_level = 100
+        self._age = age
+        self._health = health
+        self._hydration_level = hydration_level
+        self._dead = False
         self.pests = Pests()
-        if random.randint(1, 6) == 1:
+        if random.randint(1, 4) == 1:
             self.pests.destruction_power = 0
-        if random.randint(1, 6) == 2:
+        if random.randint(1, 4) == 2:
             self.illness.destruction_power = 0
 
     def grow(self):
         self.age += 1
         if self.hydration_level > 50:
-            self.health += floor(self.hydration_level * .25)\
-                           - self.illness.destruction_power - self.pests.destruction_power
+            impact = floor(self.hydration_level * .1) \
+                     - self.illness.destruction_power - self.pests.destruction_power
+            self.health += impact
         else:
-            self.health -= floor(self.hydration_level * .25)\
-                           - self.illness.destruction_power - self.pests.destruction_power
+            self.health -= abs(
+                floor(self.hydration_level * .1)) + self.illness.destruction_power + self.pests.destruction_power
         self.get_dehydrated()
+        if self.health <= 0:
+            self.die()
 
     def die(self):
-        del self
+        self._dead = True
+
+    @property
+    def dead(self):
+        return self._dead
 
     @property
     def age(self):
@@ -79,7 +88,7 @@ class BasePlant(AbstractPlant):
 
     @age.setter
     def age(self, value: int):
-        self._age = value % 100
+        self._age = value
 
     @property
     def health(self):
@@ -87,7 +96,9 @@ class BasePlant(AbstractPlant):
 
     @health.setter
     def health(self, value: int):
-        self._health = value % 100
+        self._health = value
+        if self._health > 100:
+            self._health = 100
 
     @property
     def hydration_level(self):
@@ -95,7 +106,9 @@ class BasePlant(AbstractPlant):
 
     @hydration_level.setter
     def hydration_level(self, value: int):
-        self._hydration_level = value % 100
+        self._hydration_level = value
+        if self._hydration_level > 100:
+            self._hydration_level = 100
 
     def get_dehydrated(self, value: int = 15):
         self.hydration_level -= value
@@ -103,4 +116,7 @@ class BasePlant(AbstractPlant):
             self.die()
 
     def get_hydrated(self, value: int = 15):
-        self.hydration_level = (self.hydration_level + value) % 100
+        self.hydration_level += value
+
+    def __str__(self):
+        return self.__class__.__name__

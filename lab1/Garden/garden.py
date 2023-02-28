@@ -10,11 +10,14 @@ class BaseGarden:
 
     def next_day(self):
         health_impact = self.WEATHER.is_sunny * 5
-        hydro_impact = self.WEATHER.is_rainy * 5
+        hydro_impact = self.WEATHER.is_rainy * 10
         for field in self.fields:
+            if field.plant:
+                field.plant.get_hydrated(hydro_impact)
+                field.plant.health += health_impact
             field.grow()
-            field.plant.get_hydrated(hydro_impact)
-            field.plant.health += health_impact
+
+        self.WEATHER.next_day()
 
     @property
     def fields(self):
