@@ -1,6 +1,6 @@
 {
     "weather": {
-        "_is_sunny": true,
+        "_is_sunny": false,
         "_is_rainy": false
     },
     "fields": [
@@ -9,15 +9,27 @@
             "weed": false,
             "tree": false,
             "seed": true,
-            "plant": "AppleSeed",
+            "plant": "CucumberSeed",
             "health": 100,
             "hydration_level": 100,
             "age": 0,
-            "pests_damage": 16,
-            "illness_damage": 19
+            "pests_damage": 18,
+            "illness_damage": 13
         },
         {
             "field_pk": 1,
+            "weed": false,
+            "tree": false,
+            "seed": false,
+            "plant": "Apple",
+            "health": 100,
+            "hydration_level": 100,
+            "age": 0,
+            "pests_damage": 11,
+            "illness_damage": 20
+        },
+        {
+            "field_pk": 2,
             "weed": false,
             "tree": false,
             "seed": true,
@@ -25,8 +37,20 @@
             "health": 100,
             "hydration_level": 100,
             "age": 0,
-            "pests_damage": 18,
-            "illness_damage": 10
+            "pests_damage": 12,
+            "illness_damage": 16
+        },
+        {
+            "field_pk": 3,
+            "weed": false,
+            "tree": false,
+            "seed": true,
+            "plant": "AppleSeed",
+            "health": 100,
+            "hydration_level": 100,
+            "age": 0,
+            "pests_damage": 15,
+            "illness_damage": 0
         }
     ]
 }

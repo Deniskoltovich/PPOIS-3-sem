@@ -1,9 +1,6 @@
 import random
 
-from Weather.abstract_weather import BaseWeather
-
-
-class Weather(BaseWeather):
+class Weather():
     def __init__(self):
         self._is_sunny: bool = random.choice([True, False])
         self._is_rainy: bool = True if random.randint(1, 4) == 2 else False
